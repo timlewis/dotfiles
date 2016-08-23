@@ -112,10 +112,19 @@ if ! shopt -oq posix; then
     . /etc/bash_completion
   fi
 fi
-LS_COLORS=$LS_COLORS:'di=0;35:' ; export LS_COLORS
 
 ### Added by the Heroku Toolbelt
 export PATH="/usr/local/heroku/bin:$PATH"
 
-[ -z "$TMUX" ] && export TERM=xterm-256color
+export PATH="$HOME/.rbenv/bin:$PATH"
+eval "$(ssh-agent -s)"
+export PATH="$HOME/.rbenv/plugins/ruby-build/bin:$PATH"
+export PIX_ROOT="$HOME/code"
+export PIX_SUB="$PIX_ROOT/dev.pix-cli"
+export PIX_BACKEND="$PIX_ROOT/api.platform"
+export RUBY_SERVER_SCRIPT_COMMAND="bundle exec rails server"
+eval "$(rbenv init -)"
 
+LS_COLORS=$LS_COLORS:'di=0;35:' ; export LS_COLORS
+[ -z "$TMUX" ] && export TERM=xterm-256color
+eval "$(ssh-add ~/.ssh/id_rsa)"
