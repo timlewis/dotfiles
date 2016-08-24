@@ -125,10 +125,26 @@ eval "$(rbenv init -)"
 LS_COLORS=$LS_COLORS:'di=0;35:' ; export LS_COLORS
 [ -z "$TMUX" ] && export TERM=xterm-256color
 
-# check to see if our private key is added to the ssh-agent if not prompt to add
-# ssh agent_run_state: 0=agent running w/ key; 1=agent w/o key; 2= agent not running
+# check to see if our private key is added to the ssh-agent and if agent is started
+# if not start agent and/or prompt to add key
+env=~/.ssh/agent.env
+
+agent_load_env () { test -f "$env" && . "$env" >| /dev/null ; }
+
+agent_start () {
+    (umask 077; ssh-agent >| "$env")
+    . "$env" >| /dev/null ; }
+
+agent_load_env
+
+# agent_run_state: 0=agent running w/ key; 1=agent w/o key; 2= agent not running
 agent_run_state=$(ssh-add -l >| /dev/null 2>&1; echo $?)
 
-if [ "$SSH_AUTH_SOCK" ] && [ $agent_run_state = 1 ]; then
+if [ ! "$SSH_AUTH_SOCK" ] || [ $agent_run_state = 2 ]; then
+    agent_start
+    ssh-add
+elif [ "$SSH_AUTH_SOCK" ] && [ $agent_run_state = 1 ]; then
     ssh-add
 fi
+
+unset env
