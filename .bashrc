@@ -112,6 +112,9 @@ if ! shopt -oq posix; then
     . /etc/bash_completion
   fi
 fi
+
+#Our Changes:
+
 LS_COLORS=$LS_COLORS:'di=0;35:' ; export LS_COLORS
 
 ### Added by the Heroku Toolbelt
@@ -119,3 +122,6 @@ export PATH="/usr/local/heroku/bin:$PATH"
 
 [ -z "$TMUX" ] && export TERM=xterm-256color
 
+export PATH="$HOME/.rbenv/bin:$PATH:$HOME/tools"
+eval "$($PIX_SUB/bin/pix init -)"
+eval "$(ssh-agent -s)"
