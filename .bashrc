@@ -119,12 +119,16 @@ export PATH="/usr/local/heroku/bin:$PATH"
 export PATH="$HOME/.rbenv/bin:$PATH"
 eval "$(ssh-agent -s)"
 export PATH="$HOME/.rbenv/plugins/ruby-build/bin:$PATH"
-export PIX_ROOT="$HOME/code"
-export PIX_SUB="$PIX_ROOT/dev.pix-cli"
-export PIX_BACKEND="$PIX_ROOT/api.platform"
-export RUBY_SERVER_SCRIPT_COMMAND="bundle exec rails server"
+
 eval "$(rbenv init -)"
 
 LS_COLORS=$LS_COLORS:'di=0;35:' ; export LS_COLORS
 [ -z "$TMUX" ] && export TERM=xterm-256color
-eval "$(ssh-add ~/.ssh/id_rsa)"
+
+# check to see if our private key is added to the ssh-agent if not prompt to add
+# ssh agent_run_state: 0=agent running w/ key; 1=agent w/o key; 2= agent not running
+agent_run_state=$(ssh-add -l >| /dev/null 2>&1; echo $?)
+
+if [ "$SSH_AUTH_SOCK" ] && [ $agent_run_state = 1 ]; then
+    ssh-add
+fi
