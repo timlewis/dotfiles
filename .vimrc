@@ -26,11 +26,17 @@ set wildmenu "enhanced tab completion
 
 set hidden "allow hidden buffers, dont limit to 1 file per split
 
+"mapping leader to space
+let mapleader=" " 
+
 "vim plugins installed by vim-plug
 call plug#begin()
 
 "Tim Popes rails plugin
 Plug 'tpope/vim-rails'
+
+"vim ruby plugin
+Plug 'vim-ruby/vim-ruby'
 
 "Vim bubbles implements text bubbling
 Plug 'frace/vim-bubbles'
@@ -47,4 +53,9 @@ Plug 'flazz/vim-colorschemes'
 "preview and select next colour scheme http://vim.wikia.com/wiki/Switch_color_schemes#Script
 Plug 'felixhummel/setcolors.vim'
 
+"Lusty juggler/explorer manage files and buffers in vim
+Plug 'sjbach/lusty'
+
+"Dracula Color Scheme
+Plug 'dracula/vim'
 call plug#end()
