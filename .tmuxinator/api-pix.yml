@@ -1,0 +1,38 @@
+# ~/.tmuxinator/api-pix.yml
+
+name: api-pix
+root: ~/code/api.platform
+
+# Optional tmux socket
+# socket_name: foo
+
+# Runs before everything. Use it to start daemons etc.
+# pre: sudo /etc/rc.d/mysqld start
+
+# Runs in each window and pane before window/pane specific commands. Useful for setting up interpreter versions.
+# pre_window: rbenv shell 2.0.0-p247
+
+# Pass command line options to tmux. Useful for specifying a different tmux.conf.
+# tmux_options: -f ~/.tmux.mac.conf
+
+# Change the command to call tmux.  This can be used by derivatives/wrappers like byobu.
+# tmux_command: byobu
+
+# Specifies (by name or index) which window will be selected on project startup. If not set, the first window is used.
+# startup_window: logs
+
+# Controls whether the tmux session should be attached to automatically. Defaults to true.
+# attach: false
+
+# Runs after everything. Use it to attach to tmux with custom options etc.
+# post: tmux -CC attach -t api-pix
+
+windows:
+  - editor:
+      layout: 1887,211x52,0,0[211x39,0,0,0,211x12,0,40,4] 
+      panes:
+        - vim -S ~/dotfiles/vimsession.ses
+        - bundle exec rails c
+  - shell: git pull          
+  - server: bundle exec rails s
+  - logs: tail -f log/development.log
