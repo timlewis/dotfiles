@@ -26,9 +26,21 @@ set wildmenu "enhanced tab completion
 
 set hidden "allow hidden buffers, dont limit to 1 file per split
 
+"set the session options affects mksession see :help 'sessionoptions'
+set sessionoptions=blank,buffers,folds,tabpages
+
 "mapping leader to space
 let mapleader=" " 
 
+"configure new splits to open in intuitive places
+set splitbelow
+set splitright
+
+"save vim backupfiles in a dedicated backup directory
+set backupdir=~/.vim/backup
+
+"set vim swap files to reside in a dedicated directory
+set directory=~/.vim/swap
 "disable brams splash screen
 set shortmess+=I
 
@@ -40,6 +52,7 @@ augroup autocom
 
   "execute mksession on write
   autocmd BufWritePost,FileWritePost * mksession! ~/dotfiles/vimsession.ses
+
 augroup END
 
 "vim plugins installed by vim-plug
