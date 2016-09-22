@@ -113,6 +113,7 @@ if ! shopt -oq posix; then
   fi
 fi
 
+source ~/dotfiles/tmuxinator.bash
 export EDITOR=vim
 export PATH="$HOME/.rbenv/bin:$PATH"
 export PATH="$HOME/.rbenv/plugins/ruby-build/bin:$PATH"

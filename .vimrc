@@ -29,6 +29,19 @@ set hidden "allow hidden buffers, dont limit to 1 file per split
 "mapping leader to space
 let mapleader=" " 
 
+"disable brams splash screen
+set shortmess+=I
+
+"automatic commands
+augroup autocom
+  autocmd!
+  "executes our mksession command on quit
+  autocmd VimLeave * mksession! ~/dotfiles/vimsession.ses
+
+  "execute mksession on write
+  autocmd BufWritePost,FileWritePost * mksession! ~/dotfiles/vimsession.ses
+augroup END
+
 "vim plugins installed by vim-plug
 call plug#begin()
 
