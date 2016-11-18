@@ -44,6 +44,9 @@ set directory=~/.vim/swap
 "disable brams splash screen
 set shortmess+=I
 
+"set current working directory automatically
+set autochdir
+
 "automatic commands
 augroup autocom
   autocmd!

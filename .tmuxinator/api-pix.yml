@@ -31,8 +31,8 @@ windows:
   - editor:
       layout: 1887,211x52,0,0[211x39,0,0,0,211x12,0,40,4] 
       panes:
-        - vim -S ~/dotfiles/vimsession.ses
+        - vim -O2 
         - bundle exec rails c
-  - shell: git pull          
+  - shell: git status 
   - server: bundle exec rails s
   - logs: tail -f log/development.log
